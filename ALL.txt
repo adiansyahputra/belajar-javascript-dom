@@ -47,3 +47,286 @@ Document secara otomatis dibuat dalam browser ketika membuka halaman web, sehing
 Kita bisa langsung menggunakan kata kunci document
 
 Kode : Document
+<script>
+  console.info(document);
+</script>
+
+Document Property
+Document memiliki banyak sekali property
+Property dalam Document bisa kita gunakan untuk melihat semua data yang terdapat dalam document halaman web
+https://developer.mozilla.org/en-US/docs/Web/API/Document#properties 
+
+Kode : Document Property
+<script>
+
+  console.info(document.title);
+  console.info(document.head);
+  console.info(document.body);
+  console.info(document.images);
+  console.info(document.contentType);
+
+</script>
+
+Document Method
+Document memiliki banyak sekali method
+Banyak method yang terdapat di document digunakan untuk memanipulasi data DOM, misal membuat Node, Element, Attribute atau mengambil dan menyeleksi Node di dalam document
+https://developer.mozilla.org/en-US/docs/Web/API/Document#methods 
+
+Kode : Document Method
+<div>
+  <p id="tulisan">Ini Adalah Tulisan</p>
+</div>
+<script>
+
+    const tulisan = document.getElementById("tulisan");
+    console.info(tulisan);
+
+</script>
+
+Node
+Node adalah base class dari Document, Element dan Attr
+Artinya semua fitur yang dimiliki di Node dimiliki diturunannya
+Node dalam DOM itu bentuknya adalah Tree (pohon), artinya dengan Node, kita bisa melihat Parent (node diatas nya), Children (node dibawahnya), Sibling (node disebelahnya)
+https://developer.mozilla.org/en-US/docs/Web/API/Node 
+
+Kode : Node
+<ul id="menu">
+    <li id="first">First</li>
+    <li id="second">Second</li>
+    <li id="third">Third</li>
+</ul>
+<script>
+
+    const menu = document.getElementById("menu");
+    console.info(menu);
+
+    const second = document.getElementById("second");
+    console.info(second);
+
+</script>
+
+Node Property
+Node memiliki banyak sekali property
+Property di Node banyak berisi informasi reference ke Node lain nya, seperti ke node parent nya, node children nya atau node sebelahnya
+https://developer.mozilla.org/en-US/docs/Web/API/Node#properties 
+
+Kode : Node
+<ul id="menu">
+    <li id="first">First</li>
+    <li id="second">Second</li>
+    <li id="third">Third</li>
+</ul>
+<script>
+
+    const menu = document.getElementById("menu");
+    console.info(menu);
+    console.info(menu.childNodes);
+
+    const second = document.getElementById("second");
+    console.info(second);
+    console.info(second.textContent);
+    console.info(second.previousSibling);
+    console.info(second.nextSibling);
+
+</script>
+
+Node Method
+Node memiliki banyak sekali method
+Method di Node bisa digunakan untuk memanipulasi data Node di dalam Node tersebut, misal menambah/menghapus Node children
+https://developer.mozilla.org/en-US/docs/Web/API/Node#properties 
+
+Kode : Node Method
+<ul id="menu">
+    <li id="first">First</li>
+    <li id="second">Second</li>
+    <li id="third">Third</li>
+</ul>
+<script>
+
+    const menu = document.getElementById("menu");
+    menu.removeChild(document.getElementById("first"));
+    menu.removeChild(document.getElementById("second"));
+    menu.removeChild(document.getElementById("third"));
+
+</script>
+
+Element
+Element merupakan Node yang berbentuk element, biasanya adalah element HTML, misal <html>, <head>, <body>, <div>, <table>, dan lain-lain
+https://developer.mozilla.org/en-US/docs/Web/API/Element 
+
+Kode : Element
+<h1 id="title"></h1>
+<p id="description"></p>
+
+<script>
+    const title = document.getElementById("title");
+    title.textContent = "Belajar JavaScript DOM";
+
+    const description = document.getElementById("description");
+    description.textContent = "Selamat Belajar JavaScript DOM";
+</script>
+
+Element Property
+Element memiliki banyak sekali property
+Dan karena Element adalah turunan dari Node, semua property Node pun bisa digunakan di Element
+https://developer.mozilla.org/en-US/docs/Web/API/Element#properties 
+
+Kode : Element Property
+<div id="content" class="content">
+    <h1>Belajar JavaScript DOM</h1>
+    <p>Selamat Belajar JavaScript DOM</p>
+</div>
+
+<script>
+    const content = document.getElementById("content");
+
+    console.info(content.id);
+    console.info(content.className);
+    console.info(content.tagName);
+</script>
+
+Element Method
+Element memiliki banyak sekali method
+Dan karena Element adalah turunan dari Node, semua method Node pun bisa digunakan di Element
+https://developer.mozilla.org/en-US/docs/Web/API/Element#methods 
+
+Kode : Element Method
+<div id="content" class="content">
+    <h1 id="title">Belajar JavaScript DOM</h1>
+    <p id="description">Selamat Belajar JavaScript DOM</p>
+</div>
+
+<script>
+    document.getElementById("title").remove();
+    document.getElementById("description").remove();
+</script>
+
+Membuat Element
+Sebelumnya kita hanya mengambil element menggunakan id, artinya kita perlu buat dulu element nya di HTML
+Kita juga bisa membuat object element baru, dan menambahkannya ke halaman web
+Kita bisa menggunakan method createElement(tag) pada Document
+https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement 
+
+Kode : Membuat Element
+<div id="content" class="content">
+
+</div>
+
+<script>
+    const content = document.getElementById("content");
+
+    // create h1
+    const title = document.createElement("h1");
+    title.textContent = "Belajar JavaScript DOM";
+    content.appendChild(title);
+
+    const description = document.createElement("p");
+    description.textContent = "Selamat Belajar JavaScript DOM";
+    content.appendChild(description);
+</script>
+
+NodeList
+NodeList adalah kumpulan dari Node
+Biasanya NodeList digunakan ketika kita menyeleksi banyak Node sekaligus, misal ketika kita ingin mengambil semua children di Node misalnya
+https://developer.mozilla.org/en-US/docs/Web/API/NodeList 
+
+Kode : NodeList
+<body>
+
+<ul id="menu1">
+  <li id="first">First</li>
+  <li id="second">Second</li>
+  <li id="third">Third</li>
+</ul>
+
+<ul id="menu2">
+  <li>Eko</li>
+  <li>Kurniawan</li>
+  <li>Khannedy</li>
+</ul>
+
+<script>
+
+  const list = document.querySelectorAll("li");
+  console.info(list);
+
+  const menu1 = document.getElementById("menu1").childNodes;
+  console.info(menu1);
+
+  const menu2 = document.getElementById("menu2").childNodes;
+  console.info(menu2);
+
+</script>
+</body>
+
+Live vs Static NodeList
+NodeList memiliki 2 tipe, yaitu Live dan Static
+Live artinya perubahan yang terjadi pada NodeList nya, akan merubah semua NodeList yang sama
+Static artinya perubahan yang terjadi pada NodeList nya, tidak akan merubah semua NodeList yang sama
+Saat kita menggunakan element.childNodes, NodeList tersebut bersifat Live
+Saat kita menggunakan document.querySelectorAll(), NodeList tersebut bersifat Static
+
+Kode : NodeList Live
+<body>
+
+<ul id="menu1">
+  <li id="first">First</li>
+  <li id="second">Second</li>
+  <li id="third">Third</li>
+</ul>
+
+<ul id="menu2">
+  <li>Eko</li>
+  <li>Kurniawan</li>
+  <li>Khannedy</li>
+</ul>
+
+<script>
+
+  const menu1 = document.getElementById("menu1");
+  const list = menu1.childNodes;
+
+  menu1.appendChild(document.createElement("li"));
+  menu1.appendChild(document.createElement("li"));
+
+  console.info(list);
+
+</script>
+</body>
+
+Kode : NodeList Static
+<body>
+
+<ul id="menu1">
+    <li id="first">First</li>
+    <li id="second">Second</li>
+    <li id="third">Third</li>
+</ul>
+
+<ul id="menu2">
+    <li>Eko</li>
+    <li>Kurniawan</li>
+    <li>Khannedy</li>
+</ul>
+
+<script>
+
+    let list = document.querySelectorAll("li");
+
+    const menu1 = document.getElementById("menu1");
+    menu1.appendChild(document.createElement("li"));
+    menu1.appendChild(document.createElement("li"));
+
+    console.info(list);
+
+    list = document.querySelectorAll("li");
+    console.info(list);
+
+</script>
+</body>
+
+Attr
+Attr atau attribute merupakan representasi dari attribute sebuah element, atau singkatnya key-value, key nya adalah nama attribute, dan value nya adalah value attribute
+https://developer.mozilla.org/en-US/docs/Web/API/Attr 
+
+Kode: Attr
