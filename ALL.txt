@@ -330,3 +330,254 @@ Attr atau attribute merupakan representasi dari attribute sebuah element, atau s
 https://developer.mozilla.org/en-US/docs/Web/API/Attr 
 
 Kode: Attr
+<body>
+<img id="logo" src="https://www.programmerzamannow.com/img/pzn.png" alt="PZN Logo">
+
+<script>
+
+    const logo = document.getElementById("logo");
+
+    // const src = logo.getAttributeNode("src");
+    const src = logo.getAttribute("src");
+    console.info(src);
+
+    // console.info(src.name);
+    // console.info(src.value);
+
+</script>
+
+</body>
+
+Attr Value
+Kadang kebanyakan programmer ingin langsung mendapatkan value Attr 
+Jarang sekali menggunakan object Attr nya
+Untuk mendapatkan value secara langsung, kita bisa menggunakan method getAttribute(name) di Element
+
+Kode : Attr Value
+    const logo = document.getElementById("logo");
+
+    // const src = logo.getAttributeNode("src");
+    const src = logo.getAttribute("src");
+    console.info(src);
+
+Membuat Attr
+Untuk membuat Attr, kita bisa menggunakan document.createAttribute(name)
+Lalu untuk menambahkannya ke Element, kita bisa gunakan element.setAttributeNode(attr)
+Atau kita juga bisa langsung membuat Attr langsung dengan name dan value nya menggunakan element.setAttribute(name, value)
+
+Kode: Membuat Attr
+<body>
+<img id="logo" alt="PZN Logo">
+
+<script>
+
+    const logo = document.getElementById("logo");
+
+    // const src = document.createAttribute("src");
+    // src.value = "https://www.programmerzamannow.com/img/pzn.png";
+    // logo.setAttributeNode(src);
+
+    logo.setAttribute("src", "https://www.programmerzamannow.com/img/pzn.png");
+
+</script>
+
+</body>
+
+NamedNodeMap
+NamedNodeMap merupakan kumpulan dari Attr
+Mirip seperti NodeList, namun isinya adalah Attr
+https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap 
+
+Kode: NamedNodeMap
+<body>
+<img id="logo" src="https://www.programmerzamannow.com/img/pzn.png" alt="PZN Logo">
+
+<script>
+
+    const logo = document.getElementById("logo");
+    const attributes = logo.attributes;
+
+    for (let attribute of attributes) {
+        console.info(`${attribute.name} : ${attribute.value}`);
+    }
+
+</script>
+
+</body>
+
+Text Node
+Saat kita membuat HTML, kadang kita membuat teks tanpa tag
+Saat halaman web tersebut direpresentasikan dalam DOM, text tanpa tag bukanlah merupakan Element, melainkan Node
+Lebih tepatnya adalah Text Node
+https://developer.mozilla.org/en-US/docs/Web/API/Text 
+
+Kode: Text Node
+<body>
+Eko Kurniawan Khannedy
+<script>
+
+  const text = document.body.firstChild;
+  console.info(text.wholeText);
+
+</script>
+</body>
+
+Membuat Text Node
+Kita juga bisa membuat Text Node menggunakan method document.createTextNode(string)
+Hasilnya berupa Text yang bisa kita tambahkan ke Node lain
+
+Kode: Membuat Text Node
+<script>
+
+  const text = document.createTextNode("Eko Kurniawan Khannedy");
+  document.body.appendChild(text);
+
+</script>
+
+Event Handler
+Node memiliki kemampuan bereaksi terhadap suatu kejadian, misal kejadian di klik, mouse di atas node tersebut, dan lain-lain
+Ada banyak sekali jenis kejadian yang bisa kita buatkan aksinya ketika kejadian tersebut terjadi, atau dikenal dengan nama Event Handler
+Ada dua cara kita menambahkan Event Handler ke Node, menggunakan Event Target atau Global Event Handler
+https://developer.mozilla.org/en-US/docs/Web/API/EventTarget 
+https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers 
+
+Event Target
+Event Target merupakan parent class dari Node, artinya semua Node memiliki kemampuan dari Event Target
+Pada Event Target, kita bisa menggunakan method addEventListener(type, callback) untuk menambahkan Event Handler
+https://developer.mozilla.org/en-US/docs/Web/API/EventTarget 
+
+Kode : Event Listener
+<body>
+<input id="clickMe" type="button" value="Click Me!">
+
+<script>
+
+  const button = document.getElementById("clickMe");
+  button.addEventListener("click", function (){
+    button.setAttribute("value", "You Already Click Me!");
+  });
+  button.addEventListener("click", function (){
+    console.log('Button di Click');
+  });
+
+</script>
+
+</body>
+
+Global Event Handler
+Selain menggunakan Event Target, untuk menambahkan Event Handler, kita juga bisa menggunakan Global Event Handler
+Global Event Handler bukanlah sebuah super class, hanya kontrak yang bisa kita gunakan untuk menambah event handler sesuai dengan type event nya
+https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers 
+
+Kode : Global Event Handler
+<body>
+<input id="clickMe" type="button" value="Click Me!">
+
+<script>
+
+  const button = document.getElementById("clickMe");
+  button.onclick = function (){
+      button.setAttribute("value", "You Already Click Me!");
+      console.log('Button di Click');
+  };
+
+</script>
+
+</body>
+
+Event
+
+Jenis Event
+DOM sendiri memiliki banyak sekali jenis event, tidak hanya click
+Jenis event yang bisa kita gunakan biasanya disesuaikan dengan target event nya, misal pada element video, ada event play, pause, sedangkan pada element button, tidak ada event play atau pause
+Untuk lebih detailnya, ada apa saja jenis event nya, kita bisa lihat pada halaman berikut :
+https://developer.mozilla.org/en-US/docs/Web/Events 
+
+Event
+Saat kita membuat callback function untuk Event Handler, kita juga bisa menerima data event yang memicu event itu terjadi
+Data Event tersebut bisa berbeda-beda, tergantung jenis Event nya, contohnya untuk Click, data event nya berupa Mouse Event (yang berisi lokasi mouse dan lain-lain)
+Kita bisa lihat detail dari data tiap event di halaman documentation nya :
+https://developer.mozilla.org/en-US/docs/Web/API/Event 
+
+Kode : Event
+<body>
+<h1 id="text">Click Yellow Box</h1>
+<div id="canvas" style="width: 500px; height: 500px; background-color: yellow"></div>
+
+<script>
+
+    const canvas = document.getElementById("canvas");
+    const text = document.getElementById("text");
+
+    canvas.onclick = function (event){
+        text.textContent = `You click at (${event.x}, ${event.y})`;
+    };
+
+</script>
+
+</body>
+
+Style
+DOM juga bisa digunakan untuk memanipulasi attribute style pada element dengan lebih mudah
+Kita tidak perlu menggunakan setAttribute(“style”, “value”) setiap ingin mengubah style sebuah element
+Kita bisa langsung gunakan element.style.name = value
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style 
+
+Nama Style
+Saat kita mengubah sebuah style, penamaan style menjadi berubah
+Pada style css, rata-rata menggunakan format lowercase dan -, misal background-color
+Sedangkan pada DOM Style, menggunakan format pascalCase, misal backgroundColor
+
+Kode : Style
+<body>
+<input type="button" value="blue">
+<input type="button" value="red">
+<input type="button" value="yellow">
+<div id="canvas" style="width: 500px; height: 500px; background-color: black"></div>
+
+<script>
+
+    const canvas = document.getElementById("canvas");
+    const buttons = document.querySelectorAll("input");
+
+    for (let button of buttons) {
+        button.onclick = function (){
+            canvas.style.backgroundColor = button.getAttribute("value");
+        };
+    }
+
+</script>
+
+</body>
+
+InnerText dan InnerHTML
+
+Text Content dan Inner Text
+Selain textContent, terdapat property lain bernama innerText untuk mendapatkan isi text sebuah element
+Tujuan nya sama, untuk mengambil atau mengubah isi text konten sebuah element, namun ada perbedaannya
+textContent akan mengembalikan semua isi dari konten text sebuah element
+innerText bisa tahu, bagian text mana yang ditampilkan, dan dia hanya akan mengambil text yang ditampilkan saja
+
+Kode : Text Content dan Inner Text
+<body>
+<p id="content">
+    <script>
+        console.info("Hello World");
+    </script>
+    <b>Eko</b> Kurniawan <i>Khannedy</i>
+</p>
+
+<script>
+    const content = document.getElementById("content");
+    console.info(content.textContent);
+    console.info(content.innerText);
+    console.info(content.innerHTML);
+</script>
+
+</body>
+
+Inner HTML
+Jika Text Content dan Inner Text hanya mengambil text saja, Inner HTML akan mengambil seluruh element HTML nya sebagai text
+Ini juga cocok jika kita ingin mengubah isi dari element menggunakan text yang berisi tag HTML
+
+Kode : Inner HTML
