@@ -581,3 +581,411 @@ Jika Text Content dan Inner Text hanya mengambil text saja, Inner HTML akan meng
 Ini juga cocok jika kita ingin mengubah isi dari element menggunakan text yang berisi tag HTML
 
 Kode : Inner HTML
+<body>
+<div id="content"></div>
+
+<script>
+    const content = document.getElementById("content");
+    content.innerHTML = "<h1>Belajar JavaScript DOM</h1><p>Selamat Belajar JavaScript DOM</p>"
+</script>
+
+</body>
+
+Mengubah Element dengan Inner HTML
+Salah satu kemampuan dari innerHTML adalah, kita bisa mengubah isi dari children sebuah element hanya dengan string 
+Tag yang terdapat di dalam String secara otomatis akan menjadi child element
+
+Kode : Mengubah Element dengan Inner HTML
+<body>
+<div id="content"></div>
+
+<script>
+    const content = document.getElementById("content");
+    content.innerHTML = "<h1>Belajar JavaScript DOM</h1><p>Selamat Belajar JavaScript DOM</p>"
+</script>
+
+</body>
+
+Window
+Window merupakan representasi window yang berisikan DOM Document
+Beberapa JavaScript function sebenarnya berasal dari object Window, seperti alert(), confirm() dan prompt()
+Ada banyak sekali property, method  dan event yang bisa kita gunakan pada window
+Untuk menggunakan Window, kita tidak perlu membuat objectnya, cukup gunakan kata kunci window
+https://developer.mozilla.org/en-US/docs/Web/API/Window 
+
+Kode: Window
+<body>
+<p id="content"></p>
+<p id="location"></p>
+<script>
+
+    const content = document.getElementById("content");
+    const locationParagraph = document.getElementById("location");
+
+    const height = window.screen.height;
+    const width = window.screen.width;
+    const url = window.location;
+
+    content.textContent = `Window width : ${width}, height : ${height}`;
+    locationParagraph.textContent = url;
+
+</script>
+</body>
+
+Query Selector
+Sebelumnya kita sudah menggunakan method querySelectorAll() pada Document, sekarang kita akan bahas lebih lengkap tentang Query Selector
+Query Selector merupakan method untuk menseleksi node sesuai dengan pola yang kita ingin cari
+Terdapat dua method untuk Query Selector :
+Document.querySelector(pola) digunakan menyeleksi node pertama yang sesuai dengan pola
+Document.querySelectorAll(pola) digunakan untuk menyeleksi semua node yang sesuai dengan pola
+
+Pola Query Selector
+Pola untuk Query Selector adalah menggunakan CSS Selector
+Penggunakan Pola nya mirip ketika kita membuat Selector di CSS
+Jika belum tahu tentang CSS Selector, disarankan untuk dipelajari ulang tentang materi CSS
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors 
+
+Universal Selector
+Universal Selector merupakan selector untuk menyeleksi semua element
+Kita bisa menggunakan karakter *
+https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors 
+
+Kode : Universal Selector
+<script>
+
+    const elements = document.querySelectorAll("*");
+    console.info(elements);
+
+</script>
+
+Type Selector
+Type Selector adalah selector yang digunakan untuk menyeleksi  tag type HTML yang kita pilih
+Untuk menggunakannya, kita bisa langsung sebutkan nama tag nya
+https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors 
+
+Kode : Type Selector
+<body>
+<ul>
+    <li>Satu</li>
+    <li>Dua</li>
+</ul>
+
+<ul>
+    <li>TIga</li>
+    <li>EMpat</li>
+    <li>Lima</li>
+</ul>
+
+<script>
+
+    const list = document.querySelectorAll("li");
+    console.info(list);
+
+</script>
+
+</body>
+
+Class Selector
+Class Selector merupakan selector untuk menyeleksi semua element yang memiliki class yang sesuai selector
+Untuk menggunakannya, kita bisa sebutkan nama class nya diawali dengan titik
+https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors 
+
+Kode : Class Selector
+<body>
+<ul>
+  <li class="menuItem">First</li>
+  <li>Second</li>
+  <li class="menuItem">Third</li>
+</ul>
+
+<script>
+    const menuItems = document.querySelectorAll(".menuItem");
+    console.info(menuItems);
+</script>
+
+</body>
+
+ID Selector
+ID Selector merupakan selector yang digunakan untuk menyeleksi id yang sesuai selector
+Untuk menggunakannya, kita bisa gunakan nama id diawali dengan karakter #
+https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors 
+
+Kode : ID Selector
+<body>
+<ul>
+  <li class="menuItem">First</li>
+  <li id="menu2">Second</li>
+  <li class="menuItem">Third</li>
+</ul>
+
+<script>
+    const menuItems = document.querySelectorAll("#menu2");
+    console.info(menuItems);
+</script>
+
+</body>
+
+Attribute Selector
+Attribute Selector merupakan selector yang bisa digunakan untuk menyeleksi element berdasarkan attribute nya
+Kita bisa menggunakan selector [attribute]
+Atau bisa juga untuk tag tertentu, misal menggunakan selector div[attribute]
+https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors 
+
+Kode: Attribute Selector
+<body>
+<div class="eko">EKo</div>
+<div class="kurniawan">Kurniawan</div>
+<div class="khannedy">Khannedy</div>
+
+<script>
+
+    const list = document.querySelectorAll("[class]");
+    console.info(list);
+
+</script>
+
+</body>
+
+Operator di Attribute Selector
+Kita juga bisa menggunakan operator pada attribut selector
+Misal [attribute=value], [attribute^=value] dan lain-lain
+https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors#syntax 
+
+Kode : Operator Attribute Selector
+
+<body>
+<div class="eko">EKo</div>
+<div class="ekokurniawan">Kurniawan</div>
+<div class="ekokhannedy">Khannedy</div>
+
+<script>
+
+    const list = document.querySelectorAll("div[class^=eko]");
+    console.info(list);
+
+</script>
+
+</body>
+
+Dan Selector Lainnya
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors 
+
+Node Type
+Saat kita menyeleksi Node menjadi NodeList, kadang kita ingin tahu tipe Node tersebut
+Apakah Element, TextElement atau yang lainnya
+Node sendiri memiliki property bernama nodeType, dimana kita bisa melihat tipe dari node tersebut
+https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType 
+
+Kode : Node Type
+<body>
+Eko Kurniawan Khannedy
+<!--Ini Komentar-->
+<h1>Ini Title</h1>
+
+<script>
+    const nodes = document.body.childNodes;
+    for (let node of nodes) {
+        console.info(`${node} : ${node.nodeType}`);
+    }
+</script>
+
+</body>
+
+HTML Element
+Element merupakan representasi dalam DOM
+Namun, saat menggunakan HTML, implementasi detail nya sebenarnya adalah HTML Element, yaitu turunan dari Element
+HTML Element memiliki banyak sekali property dan method tambahan selain dari Element DOM
+Kebanyakan HTML Element memiliki property yang sesuai dengan attribute yang ada pada tag html tersebut, oleh karena itu, kadang kita tidak butuh lagi menggunakan method setAttribute dan getAttribute
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement 
+
+Kode : HTML Element
+<body>
+<a id="link"></a>
+
+<script>
+
+    const link = document.getElementById("link");
+    link.href = "https://www.programmerzamannow.com";
+    link.target = "_blank";
+    link.textContent = "Website Programmer Zaman Now";
+
+</script>
+
+</body>
+
+HTML Form Element
+Form adalah salah satu element yang memiliki banyak sekali fitur diluar dari Element DOM
+Hal ini karena penggunaan Form memang lebih kompleks dibandingkan element HTML lainnya
+Ada banyak sekali property, method dan juga event yang terdapat pada HTML form element atau input element
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement 
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement 
+
+Kode : HTML Form Element
+<body>
+<form name="commentForm">
+    <label for="comment">
+        Comment : <input type="text" name="comment" id="comment">
+    </label>
+    <br>
+    <label for="from">
+        From : <input type="text" name="from" id="from">
+    </label>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<div id="commentList">
+
+</div>
+
+<script>
+
+    document.querySelector("form[name=commentForm]").onsubmit = function (event){
+        event.preventDefault();
+
+        const commentList = document.getElementById("commentList");
+        const comment = document.getElementById("comment").value;
+        const from = document.getElementById("from").value;
+
+        const commentItem = document.createElement("p");
+        commentItem.textContent = `${comment} - ${from}`;
+        commentList.appendChild(commentItem);
+
+        document.querySelector("form[name=commentForm]").reset();
+    }
+
+</script>
+
+</body>
+
+Kode : HTML Form Element JavaScript
+<script>
+
+    document.querySelector("form[name=commentForm]").onsubmit = function (event){
+        event.preventDefault();
+
+        const commentList = document.getElementById("commentList");
+        const comment = document.getElementById("comment").value;
+        const from = document.getElementById("from").value;
+
+        const commentItem = document.createElement("p");
+        commentItem.textContent = `${comment} - ${from}`;
+        commentList.appendChild(commentItem);
+
+        document.querySelector("form[name=commentForm]").reset();
+    }
+
+</script>
+
+Akses Form Via Name
+Salah satu kelebihan Form adalah, kita bisa mengakses form hanya dengan menggunakan form name
+Kita bisa gunakan document.forms[name]
+Atau jika kita ingin mengakses input nya, kita juga bisa menggunakan name nya document.forms[name][inputName]
+
+Kode : HTML Form Element JavaScript
+<body>
+<form name="commentForm">
+    <label for="comment">
+        Comment : <input type="text" name="comment" id="comment">
+    </label>
+    <br>
+    <label for="from">
+        From : <input type="text" name="from" id="from">
+    </label>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<div id="commentList">
+
+</div>
+
+<script>
+
+    document.forms['commentForm'].onsubmit = function (event){
+        event.preventDefault();
+
+        const commentList = document.getElementById("commentList");
+        const comment = document.forms['commentForm']['comment'].value;
+        const from = document.forms['commentForm']['from'].value;
+
+        const commentItem = document.createElement("p");
+        commentItem.textContent = `${comment} - ${from}`;
+        commentList.appendChild(commentItem);
+
+        document.forms['commentForm'].reset();
+    }
+
+</script>
+
+</body>
+
+HTML Table Element
+Salah satu HTML Element yang kompleks selain Form adalah Table
+HTML Table Element juga memiliki banyak sekali property, method dan event yang khusus
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement 
+
+Kode : HTML Table Element
+<body>
+<table id="orderRevenue" border="1">
+
+    <caption>Order Revenue</caption>
+
+    <thead>
+    <tr>
+        <th>Month</th>
+        <th>Income</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>January</td>
+        <td>100.000.000</td>
+    </tr>
+    <tr>
+        <td>February</td>
+        <td>200.000.000</td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td>Total</td>
+        <td>300.000.000</td>
+    </tr>
+    </tfoot>
+
+</table>
+
+<script>
+
+    const table = document.getElementById("orderRevenue");
+    console.info(table.caption);
+    console.info(table.tHead);
+    console.info(table.tBodies);
+    console.info(table.tFoot);
+    console.info(table.rows);
+
+</script>
+
+</body>
+
+Kode : HTML Table Element JavaScript
+<script>
+
+    const table = document.getElementById("orderRevenue");
+    console.info(table.caption);
+    console.info(table.tHead);
+    console.info(table.tBodies);
+    console.info(table.tFoot);
+    console.info(table.rows);
+
+</script>
+
+HTML Element Lainnya
+Sebenarnya masih banyak element-element HTML lainnya yang terdapat dalam Standard Web API
+Namun akan terlalu banyak jika dibahas satu per-satu
+Oleh karena itu saya sarankan teman-teman eksplore HTML element yang memang ingin dipelajari di halaman documentation resminya 
+https://developer.mozilla.org/en-US/docs/Web/API#interfaces 
+
